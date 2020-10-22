@@ -54,7 +54,17 @@ class LoginController extends Controller
         $us->user = $request->user;
         $us->contrasena = $request->contrasena;
 
-        if($us->user == 'admin' and $us->contrasena == '1234'){
+        $campos=[
+            'user'=>'required|numeric|max:9999999999'
+        ];
+        $Mensaje = ["required" => 'El campo es requerido',
+                "numeric" => 'El usuario solo puede contener números',
+                "max" => 'Ingrese una cédula válida'
+        ];
+
+        $this->validate($request, $campos, $Mensaje);
+
+        if($us->user == '1070248506' and $us->contrasena == 'Ud3c2020'){
             session_start();
             $_SESSION["usuario"] = 'admin';
             
@@ -69,7 +79,8 @@ class LoginController extends Controller
             ]);
             $response = $clientico->request('POST', 'autenticar', ['json' =>$us]);
             $cual = $response->getBody()->getContents();
-            if($cual == !null){                
+            
+            if($cual == !null ){                
                 session_start();   
                 $_SESSION["sede"] = json_decode($cual)->idSede->nombre;
                 $_SESSION["carrera"] = json_decode($cual)->idPrograma->nombre;           

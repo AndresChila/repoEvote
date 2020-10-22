@@ -9,11 +9,7 @@
                 <div class="panel-heading" style="background-color: #007b3e">
                 <a style="color: #ffffff"> Código de verificación</a>
                 </div>
-                
-                {{
-                    $algo                    
-                }}
-                
+
                 <div class="panel-body">
         <div class="flash-message">       
             
@@ -27,11 +23,11 @@
                 <form method="POST" action="{{ url('/segundoLogin') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
                                     {{ csrf_field() }}
                                     
-                        Ingrese código de verificación que le fue enviado a su correo institucional:
+                        Ingrese código de verificación que le fue enviado a la aplicación (ISVote):
                         <br></br>
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">Codigo</label>
+                            <label for="email" class="col-md-4 control-label">Código:</label>
 
                             <div class="col-md-8">
                                 

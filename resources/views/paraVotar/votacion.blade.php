@@ -2,9 +2,6 @@
 
 @section('content')
 
-{{
-    $nuevahora
-}}
 <div class="container">
         <div class="row">
         @include('paraVotar.sidebardos')
