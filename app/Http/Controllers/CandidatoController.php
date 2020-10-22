@@ -77,11 +77,11 @@ class CandidatoController extends Controller
         if ($request->hasFile('foto')) {
             $requestData['foto'] = $request->file('foto')->store('uploads', 'public');
         }
-        $clientico = new Client([
+        /*$clientico = new Client([
             'base_uri' => 'http://localhost:3000/',
             'timeout'  => 300.0,
         ]);
-        $clientico->request('POST', 'agregarCandidato', ['json' => $json]);
+        $clientico->request('POST', 'agregarCandidato', ['json' => $json]);*/
         $requestData['idvotacion'] = $_SESSION["idvotacion"];
         Candidato::create($requestData);
 
