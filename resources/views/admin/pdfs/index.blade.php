@@ -21,86 +21,54 @@
                                 </a>
                         </div>
                             <main class="py-4" style=".flex-center">
+                                
                                 @foreach($candidatos1 as $item)
                                 ................................................................................................................................................................................                                
                                 ________________________________________________________________________________________
                                     <div class="table-responsive">
                                         <table class="table">                                            
-                                            <thead>
-                                                <tr>
-                                                    <th>Nombre candidato</th>
-                                                    <th> <a style="color: #ffffff">
-                                                       ----------------------------------------
-                                                    </a>< </th>
-                                                    <th>votos</th>
-                                                </tr>
-                                            </thead>
                                             <tbody>
                                                 <tr>
+                                                    <th>Nombre candidato</th>
                                                     <td>{{ $item->nombrecandidato }} {{ $item->apellidocandidato }}</td>
-                                                    <td> <a style="color: #ffffff">
-                                                        ----------------------------------------
-                                                     </a> </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Votos totales</th>
                                                     <td>{{ $item->votocand }}</td>
                                                 </tr>
+                                                @foreach($sedes as $segitem)
+                                                    @if($item->nombrecandidato == $segitem->nombrecandidato)
+                                                    <tr>
+                                                        <th>_______________________________________</th>
+                                                        <td>_______________________________________</td>
+                                                    </tr>
+                                                        <tr>
+                                                            <th>Sede</th>
+                                                            <td>{{$segitem->nomlugar}}</td>
+                                                            <th>Votos</th>
+                                                            <td>{{$segitem->votlugar}}</td>
+                                                        </tr>
+                                                    @endif
+                                                @endforeach    
+                                                @foreach ($carreras as $teritem)
+                                                    @if($item->nombrecandidato == $teritem->nombrecandidato)
+                                                        <tr>
+                                                            <th>_______________________________________</th>
+                                                            <td>_______________________________________</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Carrera</th>
+                                                            <td>{{$teritem->nomcarrera}}</td>
+                                                            <th>Votos</th>
+                                                            <td>{{$teritem->votcarrera}}</td>
+                                                        </tr>
+                                                    @endif
+                                                @endforeach
                                             </tbody>
-                                            ________________________________________________________________________________________
-                                            <div class="table-responsive">
-                                                <table class="table">                                            
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Nombre sede</th>
-                                                            <th><a style="color: #ffffff">
-                                                                --------------------------------------------
-                                                             </a> </th>
-                                                            <th>votos</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>{{ $item->nomlugar }}</td>
-                                                            <td> <a style="color: #ffffff">
-                                                                ---------------------------------------------
-                                                             </a></td>
-                                                            <td>{{ $item->votlugar }}</td>
-                                                        </tr>
-                                                    </tbody>
-                                                    ________________________________________________________________________________________
-                                                    <div class="table-responsive">
-                                                        <table class="table">                                            
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Nombre Carrera</th>
-                                                                    <th><a style="color: #ffffff">
-                                                                        ----------------------------------------
-                                                                     </a>
-                                                                    </th>
-                                                                    <th>votos</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>{{ $item->nomcarrera }}</td>
-                                                                    <td><a style="color: #ffffff">
-                                                                        ----------------------------------------
-                                                                     </a>
-                                                                    </td>
-                                                                    <td>{{ $item->votcarrera }}</td>
-                                                                </tr>
-                                                            </tbody>
-                                                            
-                                                        </table>                                
-                                                    </div>
-                                                ________________________________________________________________________________________
-                                                </table>                                
-                                            </div>
-                                        ________________________________________________________________________________________
                                         </table>                                
                                     </div>
-                                ________________________________________________________________________________________
-                                ................................................................................................................................................................................
-                                
-                                @endforeach
+                                    @endforeach
+                                    ________________________________________________________________________________________
 
                             </main>
                         </div>

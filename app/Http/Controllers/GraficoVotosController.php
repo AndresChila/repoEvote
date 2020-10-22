@@ -68,9 +68,9 @@ class GraficoVotosController extends Controller
 
         $candidatos1 = Candidato::where('idvotacion', '=', $_SESSION["idvotacion"])
             ->get()->all();
-
         
-        return view('admin.graficos.index', compact('candidatos', 'candidatos1'));
+        $candmayor = $_SESSION["ganador"];
+        return view('admin.graficos.index', compact('candidatos', 'candidatos1', 'candmayor'));
     }
 
 
@@ -111,17 +111,11 @@ class GraficoVotosController extends Controller
         $candidatos = $_SESSION["reportes"];
         $ganador = $_SESSION["ganador"];
         $id = $_SESSION["idvotacion"];
-        $candidatos1 = Candidato::join('votoxcarrera', 'votoxcarrera.idcandidato', '=', 'candidatos.id')
-            ->join('votoxlugar', 'votoxlugar.idcandidato', '=', 'candidatos.id')
-            ->join('votacions', 'votacions.id', '=', 'candidatos.idvotacion')
+        $candidatos1 = Candidato::join('votacions', 'votacions.id', '=', 'candidatos.idvotacion')
             ->select(
                 'candidatos.nombrecandidato',
                 'candidatos.apellidocandidato',
                 'candidatos.numvotos AS votocand',
-                'votoxcarrera.nombre AS nomcarrera',
-                'votoxcarrera.numvotos AS votcarrera',
-                'votoxlugar.nombre AS nomlugar',
-                'votoxlugar.numvotos AS votlugar',
                 'votacions.fechainicio',
                 'votacions.horainicio',
                 'votacions.nombrevotacion',
@@ -130,8 +124,24 @@ class GraficoVotosController extends Controller
             ->where('votacions.id', '=', $id)
             ->get()
             ->all();
+        $carreras= Candidato::join('votoxcarrera', 'votoxcarrera.idcandidato','=', 'candidatos.id')
+        ->join('votacions', 'votacions.id', '=', 'candidatos.idvotacion')
+        ->select('candidatos.nombrecandidato',
+                'candidatos.apellidocandidato',
+                'votoxcarrera.nombre AS nomcarrera',
+                'votoxcarrera.numvotos AS votcarrera')
+        ->where('votacions.id', '=', $id)
+        ->get()->all();
+        $sedes =Candidato::join('votoxlugar', 'votoxlugar.idcandidato','=', 'candidatos.id')
+        ->join('votacions', 'votacions.id', '=', 'candidatos.idvotacion')
+        ->select('candidatos.nombrecandidato',
+                'candidatos.apellidocandidato',
+                'votoxlugar.nombre AS nomlugar',
+                'votoxlugar.numvotos AS votlugar')
+        ->where('votacions.id', '=', $id)
+        ->get()->all();
 
-        $pdf = Facade::loadView('admin.pdfs.index', compact('candidatos1', 'ganador'));
+        $pdf = Facade::loadView('admin.pdfs.index', compact('candidatos1', 'ganador','carreras','sedes'));
         $pdf->setOptions(['enable-javascript', true]);
         $pdf->setOptions(['javascript-delay <msec>', 1000]);
         $pdf->setOptions(['no-stop-slow-scripts', true]);

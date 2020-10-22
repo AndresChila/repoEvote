@@ -8,8 +8,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'AB-Vote') }}</title>
-    
+    <title>Iniciar sesión</title>
+    <link rel="icon" type="image/png" href="/img/iconoappvote.png"/>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">

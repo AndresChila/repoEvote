@@ -9,7 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta name="csrf-token" content="{{{ csrf_token() }}}">
 
-    <title>@yield('title', 'My Website')</title>
+    <title>Public</title>
+    <link rel="icon" type="image/png" href="/img/iconoappvote.png"/>
 
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"></script>
     <script src="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"></script>
