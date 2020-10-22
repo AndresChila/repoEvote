@@ -105,8 +105,15 @@ class ParaVotarController extends Controller
             ->where('candidatos.idvotacion', '=', $id)
             ->get()->all();
 
-        $sql1 = Votacion::where('id', '=', $id)->get()->all();
+        $sql1 = Votacion::where('id', '=', $id)
+        ->get()->all();
 
+        $validar = Votacion::join('voto','voto.votacion','=', 'votacions.id')
+        ->where('votacions.id', '=', $id)
+        ->where('voto.cedulavotante','=', $_SESSION["codigo"])
+        ->where('realizada','=', 2)
+        ->orWhere('realizada','=', 1)
+        ->get()->all();
 
 
         $_SESSION["idvotacion"] = $id;
@@ -116,7 +123,7 @@ class ParaVotarController extends Controller
         $nuevahora = date('m/d/y g:i A', $nuevahora);
 
 
-        return view('paraVotar.votacion', compact('sql', 'sql1', 'nuevahora'));
+        return view('paraVotar.votacion', compact('sql', 'validar', 'nuevahora'));
     }
 
     /**

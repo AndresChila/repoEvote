@@ -19,7 +19,9 @@
                 <form method="POST" action="{{ url('/login') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
                                     {{ csrf_field() }}
 
-
+                        <div>
+                            Tenga en cuenta que posterior al registro, debe verificar su correo institucional mediante la aplicacion ISVote en el apartado de "Validar Email"
+                        </div>
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">Usuario(cédula): </label>
 

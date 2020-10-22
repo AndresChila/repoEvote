@@ -5,6 +5,7 @@
 <div class="container">
         <div class="row">
         @include('paraVotar.sidebardos')
+        @if(sizeof($validar) == 0)
             <div class="col-md-9">
                 <div class="card">
                     <div class="card-header" style="background-color: #007b3e">
@@ -89,7 +90,15 @@
                     </div>
                 </div>
             </div>
-        </div>
+        @else
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header" style="background-color: #007b3e">
+                    <a style="color: #ffffff">Votación no disponible </a>
+                    </div>
+                </div>
+            </div>
+        @endif
     </div>
     
 
