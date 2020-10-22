@@ -59,7 +59,7 @@
                                     <tr>
                                     @foreach($sql as $candidato)
                                         <th>
-                                            <label value="{{ $candidato->id }}"> {{$candidato->nombrecandidato}} </label> 
+                                            <label value="{{ $candidato->id }}"> {{$candidato->nombrecandidato}} {{$candidato->apellidocandidato}} </label> 
                                         </th>
                                     @endforeach
                                     </tr>
