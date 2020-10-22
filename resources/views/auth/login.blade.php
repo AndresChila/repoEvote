@@ -21,7 +21,7 @@
 
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">Usuario</label>
+                            <label for="email" class="col-md-4 control-label">Usuario(cédula): </label>
 
                             <div class="col-md-8">
                                 <input id="user" type="user" class="form-control" name="user" value="{{ old('email') }}" required autofocus>
@@ -35,7 +35,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Contraseña</label>
+                            <label for="password" class="col-md-4 control-label">Contraseña:</label>
 
                             <div class="col-md-8">
                                 <input id="contrasena" type="password" class="form-control" name="contrasena" required>
