@@ -5,14 +5,14 @@
                     <div class="card">
                         <div class="card-header" style="background-color: #007B3E" >
                         <a style="color: #ffffff">
-                            Resultados para la votacion {{$candidatos1[1]->nombrevotacion}} 
+                            Resultados para la votacion {{$candidatos1[0]->nombrevotacion}} 
                             
                             </a>
                         </div>
                         <div class="card-header" style="background-color: #007B3E" >
                             <a style="color: #ffffff">
                                 
-                                Realizada el dia {{$candidatos1[1]->fechainicio}} a las {{$candidatos1[1]->horainicio}}
+                                Realizada el dia {{$candidatos1[0]->fechainicio}} a las {{$candidatos1[0]->horainicio}}
                                 </a>
                             </div>
                         <div class="card-header" style="background-color: #ffd700" >
