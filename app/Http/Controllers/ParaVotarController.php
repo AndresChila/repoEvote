@@ -112,7 +112,6 @@ class ParaVotarController extends Controller
         ->where('votacions.id', '=', $id)
         ->where('voto.cedulavotante','=', $_SESSION["codigo"])
         ->where('realizada','=', 2)
-        ->orWhere('realizada','=', 1)
         ->get()->all();
 
 
