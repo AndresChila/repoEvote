@@ -6,7 +6,7 @@
                         <div class="card-header" style="background-color: #007B3E" >
                         <a style="color: #ffffff">
                             Resultados para la votacion {{$candidatos1[0]->nombrevotacion}} 
-                            
+                           
                             </a>
                         </div>
                         <div class="card-header" style="background-color: #007B3E" >

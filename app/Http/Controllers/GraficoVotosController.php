@@ -126,6 +126,7 @@ class GraficoVotosController extends Controller
             ->where('votacions.id', '=', $id)
             ->get()
             ->all();
+            
         $carreras= Candidato::join('votoxcarrera', 'votoxcarrera.idcandidato','=', 'candidatos.id')
         ->join('votacions', 'votacions.id', '=', 'candidatos.idvotacion')
         ->select('candidatos.nombrecandidato',
@@ -134,6 +135,7 @@ class GraficoVotosController extends Controller
                 'votoxcarrera.numvotos AS votcarrera')
         ->where('votacions.id', '=', $id)
         ->get()->all();
+
         $sedes =Candidato::join('votoxlugar', 'votoxlugar.idcandidato','=', 'candidatos.id')
         ->join('votacions', 'votacions.id', '=', 'candidatos.idvotacion')
         ->select('candidatos.nombrecandidato',

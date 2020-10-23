@@ -21,8 +21,17 @@
                             </a>
                         </div>
                         
+                        @if(isset($candidatos1))
+                            {{
+                                print_r($candidatos1)
 
-                        
+                            }}
+                        @endif
+                        @if(isset($candidatos))
+                            {{
+                                print_r($candidatos)
+                            }}
+                        @endif
 
                         <form method="POST" action="{{ url('/graficos') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
                             {{ csrf_field() }}

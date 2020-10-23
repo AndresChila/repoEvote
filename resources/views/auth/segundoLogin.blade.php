@@ -17,6 +17,9 @@
                 <p class="alert alert-" style="color: red" >Codigo de verificación no coincide <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
             @endif       
         </div> <!-- end .flash-message -->
+        {{
+            $algo
+        }}
      <?php
         $variableOTP = $algo;
      ?>
