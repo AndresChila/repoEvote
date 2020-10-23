@@ -67,11 +67,14 @@ class CandidatoController extends Controller
         $json->nombre = $request->nombrecandidato . ' ' . $request->apellidocandidato;
         $json->account = $this->CUENTA_GANACHE;
         $campos = [
-            'nombrecandidato' => 'required|string|max:100',
-            'apellidocandidato' => 'required|string|max:100',
+            'nombrecandidato' => 'required|string|max:100|min:2',
+            'apellidocandidato' => 'required|string|max:100|min:2',
             'foto' => 'required|max:10000|mimes:jpeg,jpg,png'
         ];
-        $Mensaje = ["required" => 'El campo es requerido.'];
+        $Mensaje = ["required" => 'El campo es requerido.',
+                    "min" => 'Dato no válido, mínimo debe tener 3 caracteres',
+                    "mimes" => 'El formato de la foto debe ser jpeg, jpg o png'        
+    ];
 
         $this->validate($request, $campos, $Mensaje);
         if ($request->hasFile('foto')) {
@@ -138,17 +141,20 @@ class CandidatoController extends Controller
         session_start();
         $requestData = $request->all();
         $campos = [
-            'nombrecandidato' => 'required|string|max:100',
-            'apellidocandidato' => 'required|string|max:100'
+            'nombrecandidato' => 'required|string|max:100|min:2',
+            'apellidocandidato' => 'required|string|max:100|min:2',
+            'foto' => 'required|max:10000|mimes:jpeg,jpg,png'
         ];
-
         if ($request->hasFile('foto')) {
             $campos += ['foto' => 'max:10000|mimes:jpeg,jpg,png'];
             $candidato = Candidato::findOrFail($id);
             Storage::delete(['public/' . $candidato->foto]);
             $requestData['foto'] = $request->file('foto')->store('uploads', 'public');
         }
-        $Mensaje = ["required" => 'El campo es requerido'];
+        $Mensaje = ["required" => 'El campo es requerido.',
+                    "min" => 'Dato no válido, mínimo debe tener 3 caracteres',
+                    "mimes" => 'El formato de la foto debe ser jpeg, jpg o png'        
+        ]  ;
 
         $this->validate($request, $campos, $Mensaje);
         $candidato = Candidato::findOrFail($id);

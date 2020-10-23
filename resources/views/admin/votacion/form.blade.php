@@ -9,6 +9,11 @@
     <select name="tipovotacion" class="form-control" id="tipovotacion" >    
         <option value=""> --seleccione una opcion-- </option>
         @foreach( $roles as $key => $value )
+            @if(isset($votacion->tipovotacion))
+                @if($key == $votacion->tipovotacion)
+                    <option value="{{ $votacion->tipovotacion }}" selected>{{ $value }}</option>
+                @endif
+            @endif
             <option value="{{ $key }}">{{ $value }}</option>
         @endforeach 
     </select>
@@ -17,13 +22,13 @@
 <div class="form-group {{ $errors->has('fechainicio') ? 'has-error' : ''}}">
     <label for="fechainicio" class="control-label">{{ 'Fecha inicio' }}</label>
     
-    <input class="date form-control" type="text" name="fechainicio" id="fechainicio">
+    <input class="date form-control" type="text" name="fechainicio" id="fechainicio" value="{{ isset($votacion->fechainicio) ? $votacion->fechainicio : ''}}">
     {!! $errors->first('fechainicio', '<p class="alert alert-danger">:message</p>') !!}
 </div>
 <div class="form-group">
     <label for="horainicio" class="control-label">{{ 'Hora inicio' }}</label>
     <br/>
-    <input class="time form-control" type="time" name="horainicio" id="horainicio"> </input>
+    <input class="time form-control" type="time" name="horainicio" id="horainicio" value="{{ isset($votacion->horainicio) ? $votacion->horainicio : ''}}"> </input>
 </div>
 <div class="form-group {{ $errors->has('duracion') ? 'has-error' : ''}}">
     <label for="duracion" class="control-label">{{ 'Duración' }}</label>
@@ -31,6 +36,11 @@
     <select class="form-control" name="duracion" id="duracion" value="{{ isset($votacion->duracion) ? $votacion->duracion : ''}}" >
         <option value="">-Duracion-</option>
         @for($i=1;$i<=12;$i++){
+            @if(isset($votacion->duracion))
+                @if($i == $votacion->duracion)
+                    <option value="{{ $votacion->duracion }}" selected>{{ $i }}</option>
+                @endif
+            @endif
             <option value={{$i}}>{{$i}}</option>
         }@endfor
     </select>
