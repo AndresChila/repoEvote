@@ -23,7 +23,6 @@ class ParaVotarController extends Controller
     public function index(Request $request)
     {
         session_start();
-
         $fecha = new DateTime(Carbon::now());
         $str = $fecha->format("y-m-d");
         $actual = $fecha->format("h:i A");
@@ -140,7 +139,7 @@ class ParaVotarController extends Controller
             $varuno = Votoxlugar::where('nombre', 'LIKE', '%' . $_SESSION["sede"] . '%')->get()->all();
             $vardos = Votoxcarrera::where('nombre', 'LIKE', '%' . $_SESSION["carrera"] . '%')->get()->all();
             if (sizeof($varuno) > 0 ) {
-                $cantidad = $varuno->numvotos + 1;
+                $cantidad = $varuno[0]->numvotos + 1;
                 Votoxlugar::where('nombre', $_SESSION["sede"])->update(['numvotos' => $cantidad]);
             } else {
                 $votoxlugar["nombre"] = $_SESSION["sede"];
@@ -149,7 +148,7 @@ class ParaVotarController extends Controller
                 Votoxlugar::create($votoxlugar);
             }
             if (sizeof($vardos) > 0) {
-                $cantidad = $vardos->numvotos + 1;
+                $cantidad = $vardos[0]->numvotos + 1;
                 Votoxcarrera::where('nombre', $_SESSION["carrera"])->update(['numvotos' => $cantidad]);
             } else {
                 $votoxcarrera["nombre"] = $_SESSION["carrera"];
@@ -170,7 +169,8 @@ class ParaVotarController extends Controller
             return view('paraVotar.votacionCreada', compact('nuevo'));
         }
         else{
-            $fecha = new DateTime(Carbon::now());
+            
+        $fecha = new DateTime(Carbon::now());
         $str = $fecha->format("y-m-d");
         $actual = $fecha->format("h:i A");
 

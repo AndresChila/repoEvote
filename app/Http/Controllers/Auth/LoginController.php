@@ -112,7 +112,7 @@ class LoginController extends Controller
         if( $_SESSION["otp"] == $request->user){
             return redirect('paraVotar');
         }
-
+        
         $aaa['error'] = 1;
 
         return view('auth.segundoLogin',$aaa, compact('flash_message', '.'));
