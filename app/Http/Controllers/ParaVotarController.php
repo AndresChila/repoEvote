@@ -139,7 +139,7 @@ class ParaVotarController extends Controller
         if(sizeof($votohecho) == 0){
             $varuno = Votoxlugar::where('nombre', 'LIKE', '%' . $_SESSION["sede"] . '%');
             $vardos = Votoxcarrera::where('nombre', 'LIKE', '%' . $_SESSION["carrera"] . '%');
-            if ($varuno != null) {
+            if (sizeof($varuno) > 0 ) {
                 $cantidad = $varuno->numvotos + 1;
                 Votoxlugar::where('nombre', $_SESSION["sede"])->update(['numvotos' => $cantidad]);
             } else {
@@ -148,7 +148,7 @@ class ParaVotarController extends Controller
 
                 Votoxlugar::create($votoxlugar);
             }
-            if ($vardos != null) {
+            if (sizeof($vardos) > 0) {
                 $cantidad = $vardos->numvotos + 1;
                 Votoxcarrera::where('nombre', $_SESSION["carrera"])->update(['numvotos' => $cantidad]);
             } else {
