@@ -55,7 +55,9 @@
                                 
                                     <button class="form-control" style="background-color: #fec006" ><i class="fa fa-arrow-left" aria-hidden="true" ></i> Ingresar </button>
         
-                               
+                                    <a href="{{ route('auth.obtenernuevocodigo') }}" style="color: #007B3E">
+                                        Obtener otro código.
+                                    </a>
                                 
                             </div>
                         </div>

@@ -50,9 +50,12 @@ class LoginController extends Controller
     }
     
     public function redireccionar(Request $request){
+        session_start();
+        $_SESSION["entraValido"]=false;
         $us = new User();
         $us->user = $request->user;
         $us->contrasena = $request->contrasena;
+        $_SESSION["user"]=$us;
 
         $campos=[
             'user'=>'required|numeric|max:9999999999'
@@ -65,7 +68,6 @@ class LoginController extends Controller
         $this->validate($request, $campos, $Mensaje);
 
         if($us->user == '1070248506' and $us->contrasena == 'Ud3c2020'){
-            session_start();
             $_SESSION["usuario"] = 'admin';
             
             return redirect('votacion');
@@ -80,8 +82,7 @@ class LoginController extends Controller
             $response = $clientico->request('POST', 'autenticar', ['json' =>$us]);
             $cual = $response->getBody()->getContents();
             
-            if($cual == !null ){                
-                session_start();   
+            if($cual == !null ){                  
                 $_SESSION["sede"] = json_decode($cual)->idSede->nombre;
                 $_SESSION["carrera"] = json_decode($cual)->idPrograma->nombre;           
                 $_SESSION["otp"] = json_decode($cual)->OTP;
@@ -108,8 +109,10 @@ class LoginController extends Controller
         $aaa['nombre'] = $_SESSION["nombre"];
         $aaa['apellido'] = $_SESSION["apellido"];        
         $aaa['codigo'] = $_SESSION["codigo"];
+        
 
         if( $_SESSION["otp"] == $request->user){
+            $_SESSION["entraValido"]=true;
             return redirect('paraVotar');
         }
         
@@ -117,6 +120,29 @@ class LoginController extends Controller
 
         return view('auth.segundoLogin',$aaa, compact('flash_message', '.'));
        
+    }
+
+    public function obtenernuevocodigo(){
+        session_start();
+        $us = $_SESSION["user"];
+        $clientico = new Client([
+            // Base URI is used with relative requests
+            'base_uri' => 'http://'. $this->IP_SERVER .':8080/autenticacion-app/rest/personas/',
+            // You can set any number of default request options.
+            'timeout'  => 2.0,      
+        ]);
+        $response = $clientico->request('POST', 'autenticar', ['json' =>$us]);
+        $cual = $response->getBody()->getContents();                
+        $_SESSION["sede"] = json_decode($cual)->idSede->nombre;
+        $_SESSION["carrera"] = json_decode($cual)->idPrograma->nombre;           
+        $_SESSION["otp"] = json_decode($cual)->OTP;
+        $_SESSION["usuario"] = json_decode($cual)->idTipoPer->descripcion;
+        $_SESSION["nombre"] = json_decode($cual)->nombre;
+        $_SESSION["codigo"] = json_decode($cual)->codigo;
+        $_SESSION["apellido"] = json_decode($cual)->apellido;
+        $aaa['error'] = -2;
+        $aaa['algo'] =json_decode($cual)->OTP;
+        return view('auth.segundoLogin', $aaa);
     }
 
     public function cerrarsesion(){
@@ -132,7 +158,7 @@ class LoginController extends Controller
         $_SESSION["reportes"] = null;
         $_SESSION["sede"] = null;
         $_SESSION["carrera"] = null;
-
+        $_SESSION["entraValido"] = null;
         return view('auth.login');
     }
         

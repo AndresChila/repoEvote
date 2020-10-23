@@ -24,6 +24,9 @@ Route::post('segundoLogin', 'Auth\LoginController@segundoLogin');
 Route::resource('paraVotar', 'ParaVotarController');
 Route::post('login', 'Auth\LoginController@redireccionar');
 Route::any('cerrarsesion', 'Auth\LoginController@cerrarsesion');
+
+Route::get('obtenernuevocodigo', 'Auth\LoginController@obtenernuevocodigo')
+    ->name('auth.obtenernuevocodigo');
 Route::resource('votacion', 'VotacionController');
 Route::resource('graficos', 'GraficoVotosController');
 Route::resource('candidato', 'CandidatoController');
@@ -39,6 +42,7 @@ Route::get('encurso', 'VotacionController@encurso')
     
 Route::get('/test/datepicker', function () {
     return view('datepicker');
+
 
 
 });
