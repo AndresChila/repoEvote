@@ -23,10 +23,10 @@ class VotacionController extends Controller
         $keyword = $request->get('search');
         $perPage = 25;
         if (!empty($keyword)) {
-            $votacion = Votacion::where('nombrevotacion', 'LIKE', "%$keyword%")
+            $votacion = Votacion::where('realizada', '=', 0)  
+                ->where('nombrevotacion', 'LIKE', "%$keyword%")
                 ->orWhere('tipovotacion', 'LIKE', "%$keyword%")
-                ->orWhere('fechainicio', 'LIKE', "%$keyword%")
-                ->where('realizada', '=', 0)                     
+                ->orWhere('fechainicio', 'LIKE', "%$keyword%")             
                 ->latest()->paginate($perPage);
         } else {
             $votacion = Votacion::latest()->where('realizada', '=', 0)->paginate($perPage);

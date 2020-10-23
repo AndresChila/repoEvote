@@ -70,8 +70,6 @@
                                         <td>
                                         <img src="{{ asset('storage').'/'. $candidato->foto }}" alt="" width="150" class="img-thumbnail img-fluid">
                                         </td>
-                                        <br/>
-                                        <br/>
                                         
                                     @endforeach 
                                     </tr>

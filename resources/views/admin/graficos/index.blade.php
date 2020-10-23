@@ -60,7 +60,7 @@
                                         @endforeach                                    
                                     ]);
                                     var options = {
-                                        title:'Grafico de resultados'
+                                        title:'Gráfico de resultados'
                                     };
                                     var chart = new google.visualization.PieChart(document.getElementById('piechart'));
                                     chart.draw(data,options);

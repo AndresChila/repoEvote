@@ -24,10 +24,11 @@ class GraficoVotosController extends Controller
         $keyword = $request->get('search');
         $perPage = 5;
         if (!empty($keyword)) {
-            $votacion = Votacion::where('nombrevotacion', 'LIKE', "%$keyword%")
+            $votacion = Votacion::where('realizada', '=', 1)
+                ->where('nombrevotacion', 'LIKE', "%$keyword%")
                 ->orWhere('tipovotacion', 'LIKE', "%$keyword%")
                 ->orWhere('fechainicio', 'LIKE', "%$keyword%")
-                ->where('realizada', '=', 1)
+                
                 ->latest()->paginate($perPage);
         } else {
             $votacion = Votacion::latest()->where('realizada', '=', 1)->paginate($perPage);
