@@ -7,9 +7,8 @@
     $apellido = $_SESSION["apellido"];
     
 @endphp
-@if(!isset($_SESSION["entraValido"]) && $_SESSION["entraValido"] != true)
+@if($_SESSION["entraValido"] == true)
     @if($usuario == null)
-    
         <head>
             <meta charset="utf-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
