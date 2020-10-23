@@ -132,37 +132,63 @@ class ParaVotarController extends Controller
     public function votar($id)
     {
         session_start();
-        $varuno = Votoxlugar::where('nombre', 'LIKE', '%' . $_SESSION["sede"] . '%');
-        $vardos = Votoxcarrera::where('nombre', 'LIKE', '%' . $_SESSION["carrera"] . '%');
-        if ($varuno == null) {
-            $cantidad = $varuno->numvotos + 1;
-            Votoxlugar::where('nombre', $_SESSION["sede"])->update(['numvotos' => $cantidad]);
-        } else {
-            $votoxlugar["nombre"] = $_SESSION["sede"];
-            $votoxlugar["idcandidato"] = $id;
 
-            Votoxlugar::create($votoxlugar);
+        $votohecho = Voto::where('cedulavotante','=', $_SESSION["codigo"])->
+        where('votacion','=',$_SESSION["idvotacion"])
+        ->get()->all();
+        if(sizeof($votohecho) == 0){
+            $varuno = Votoxlugar::where('nombre', 'LIKE', '%' . $_SESSION["sede"] . '%');
+            $vardos = Votoxcarrera::where('nombre', 'LIKE', '%' . $_SESSION["carrera"] . '%');
+            if ($varuno == null) {
+                $cantidad = $varuno->numvotos + 1;
+                Votoxlugar::where('nombre', $_SESSION["sede"])->update(['numvotos' => $cantidad]);
+            } else {
+                $votoxlugar["nombre"] = $_SESSION["sede"];
+                $votoxlugar["idcandidato"] = $id;
+
+                Votoxlugar::create($votoxlugar);
+            }
+            if ($vardos == null) {
+                $cantidad = $vardos->numvotos + 1;
+                Votoxcarrera::where('nombre', $_SESSION["carrera"])->update(['numvotos' => $cantidad]);
+            } else {
+                $votoxcarrera["nombre"] = $_SESSION["carrera"];
+                $votoxcarrera["idcandidato"] = $id;
+
+                Votoxcarrera::create($votoxcarrera);
+            }
+
+
+            $voto["cedulavotante"] = $_SESSION["codigo"];
+            $voto["votacion"] = $_SESSION["idvotacion"];
+
+            Voto::create($voto);
+
+            $candidato = Candidato::findOrFail($id);
+            $nuevo = $candidato->numvotos + 1;
+            Candidato::where('id', $id)->update(['numvotos' => $nuevo]);
+            return view('paraVotar.votacionCreada', compact('nuevo'));
         }
-        if ($vardos == null) {
-            $cantidad = $vardos->numvotos + 1;
-            Votoxcarrera::where('nombre', $_SESSION["carrera"])->update(['numvotos' => $cantidad]);
-        } else {
-            $votoxcarrera["nombre"] = $_SESSION["carrera"];
-            $votoxcarrera["idcandidato"] = $id;
+        else{
+            $fecha = new DateTime(Carbon::now());
+        $str = $fecha->format("y-m-d");
+        $actual = $fecha->format("h:i A");
 
-            Votoxcarrera::create($votoxcarrera);
+        $votaciones = Votacion::distinct()
+            ->join('tipo_votacions', 'tipo_votacions.id', '=', 'votacions.tipovotacion')
+            ->select('votacions.id', 'votacions.nombrevotacion', 'tipo_votacions.nombretipo AS tipo', 'votacions.horainicio AS hora', 'votacions.duracion AS duracion')
+            ->where('tipo_votacions.ocupacionpermitida', 'like', '%' . $_SESSION["usuario"] . '%')
+            ->where('votacions.fechainicio', '=', $str)
+            ->whereRaw("CURTIME() BETWEEN  votacions.horainicio AND ADDTIME(votacions.horainicio, CONCAT(votacions.duracion, ':00:00'))")
+            ->where('votacions.realizada', '=', 2)
+            ->whereRaw("votacions.id NOT IN (select voto.votacion FROM voto WHERE cedulavotante =" . $_SESSION["codigo"] . ")")
+            ->get()->all();
+
+
+        $hoy = $fecha->format("d-m-Y");
+        $_SESSION["votaciones"] = $votaciones;
+        return view('paraVotar.index', compact('votaciones', 'hoy', 'actual'));
         }
-
-
-        $voto["cedulavotante"] = $_SESSION["codigo"];
-        $voto["votacion"] = $_SESSION["idvotacion"];
-
-        Voto::create($voto);
-
-        $candidato = Candidato::findOrFail($id);
-        $nuevo = $candidato->numvotos + 1;
-        Candidato::where('id', $id)->update(['numvotos' => $nuevo]);
-        return view('paraVotar.votacionCreada', compact('nuevo'));
     }
 
     public function buscar_proximas()
