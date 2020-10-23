@@ -215,7 +215,7 @@ class ParaVotarController extends Controller
         session_start();
         $_SESSION["idvotacion"] = $id;
 
-        $candidatos = Candidato::distinct()->select('nombrecandidato', 'numvotos', 'id')
+        $candidatos = Candidato::distinct()->select('nombrecandidato','apellidocandidato', 'numvotos', 'id')
             ->where('idvotacion', '=', $id)
             ->get()->all();
 
@@ -223,11 +223,11 @@ class ParaVotarController extends Controller
         $candmayor = '';
         foreach ($candidatos as $cand) {
             if ($cand->numvotos > $nummayor) {
-                $candmayor = $cand->nombrecandidato;
+                $candmayor = $cand->nombrecandidato . ' ' . $cand->apellidocandidato;
             }
         }
 
-        $candidatos = Candidato::distinct()->select('nombrecandidato', 'numvotos', 'id')
+        $candidatos = Candidato::distinct()->select('nombrecandidato','apellidocandidato', 'numvotos', 'id')
             ->where('idvotacion', '=', $id)
             ->get()->all();
 

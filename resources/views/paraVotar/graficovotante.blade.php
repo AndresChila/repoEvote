@@ -24,7 +24,7 @@
                                     var data = google.visualization.arrayToDataTable([
                                         ['votos', 'cantidad'],
                                         @foreach ($candidatos as $item)
-                                            ['{{ $item->nombrecandidato }}', {{ $item->numvotos }}],
+                                            ['{{ $item->nombrecandidato }} {{ $item->apellidocandidato }}', {{ $item->numvotos }}],
                                         @endforeach                                    
                                     ]);
                                     var options = {
