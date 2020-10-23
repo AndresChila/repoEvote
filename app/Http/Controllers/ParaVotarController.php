@@ -223,6 +223,7 @@ class ParaVotarController extends Controller
         foreach ($candidatos as $cand) {
             if ($cand->numvotos > $nummayor) {
                 $candmayor = $cand->nombrecandidato . ' ' . $cand->apellidocandidato;
+                $nummayor = $cand->numvotos;
             }
         }
 

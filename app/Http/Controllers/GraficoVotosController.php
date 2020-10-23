@@ -49,7 +49,7 @@ class GraficoVotosController extends Controller
         session_start();
         $idv = $request->select;
         if ($idv == 1) {
-            $candidatos = Candidato::distinct()->select('nombrecandidato', 'numvotos')
+            $candidatos = Candidato::distinct()->select('nombrecandidato', 'apellidocandidato', 'numvotos')
                 ->where('idvotacion', '=', $_SESSION["idvotacion"])
                 ->get()->all();
         }
@@ -83,7 +83,7 @@ class GraficoVotosController extends Controller
 
         session_start();
         $_SESSION["idvotacion"] = $id;
-        $candidatos = Candidato::distinct()->select('nombrecandidato', 'numvotos', 'id')
+        $candidatos = Candidato::distinct()->select('nombrecandidato', 'apellidocandidato', 'numvotos', 'id')
             ->where('idvotacion', '=', $id)
             ->get()->all();
 
@@ -94,7 +94,8 @@ class GraficoVotosController extends Controller
         $candmayor = '';
         foreach ($candidatos as $cand) {
             if ($cand->numvotos > $nummayor) {
-                $candmayor = $cand->nombrecandidato;
+                $candmayor = $cand->nombrecandidato . ' ' .$cand->apellidocandidato;
+                $nummayor = $cand->numvotos;
             }
         }
         $_SESSION["ganador"] = $candmayor;

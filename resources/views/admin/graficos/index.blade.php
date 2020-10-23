@@ -32,7 +32,7 @@
                             </br>
                             <select class="form-control" id ="cand" name="cand" >
                                 @foreach($candidatos1 as $item)
-                                    <option value="{{$item->id}}" >{{$item->nombrecandidato}}</option> 
+                                    <option value="{{$item->id}}" >{{$item->nombrecandidato}} {{$item->apellidocandidato}}</option> 
                                 @endforeach
                             </select>
                             </br>
@@ -56,7 +56,7 @@
                                     var data = google.visualization.arrayToDataTable([
                                         ['votos', 'cantidad'],
                                         @foreach ($candidatos as $item)
-                                            ['{{ $item->nombrecandidato }}', {{ $item->numvotos }}],
+                                            ['{{ $item->nombrecandidato }} {{ $item->apellidocandidato}}', {{ $item->numvotos }}],
                                         @endforeach                                    
                                     ]);
                                     var options = {
