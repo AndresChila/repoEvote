@@ -136,12 +136,18 @@ class ParaVotarController extends Controller
         where('votacion','=',$_SESSION["idvotacion"])
         ->get()->all();
         if(sizeof($votohecho) == 0){
-            $varuno = Votoxlugar::where('nombre', 'LIKE', '%' . $_SESSION["sede"] . '%')->get()->all();
-            $vardos = Votoxcarrera::where('nombre', 'LIKE', '%' . $_SESSION["carrera"] . '%')->get()->all();
+            $varuno = Votoxlugar::where('nombre', 'LIKE', '%' . $_SESSION["sede"] . '%')
+            ->where('idcandidato', '=', $id)
+            ->get()
+            ->all();
+            $vardos = Votoxcarrera::where('nombre', 'LIKE', '%' . $_SESSION["carrera"] . '%')
+            ->where('idcandidato', '=', $id)
+            ->get()
+            ->all();
             if (sizeof($varuno) > 0 ) {
                 $cantidad = $varuno[0]->numvotos + 1;
-                Votoxlugar::where('nombre', $_SESSION["sede"])
-                ->where('idcandidato', '=', $id)
+                Votoxlugar::where('idcandidato', '=', $id)
+                ->where('nombre', $_SESSION["sede"])
                 ->update(['numvotos' => $cantidad]);
             } else {
                 $votoxlugar["nombre"] = $_SESSION["sede"];
@@ -151,8 +157,8 @@ class ParaVotarController extends Controller
             }
             if (sizeof($vardos) > 0) {
                 $cantidad = $vardos[0]->numvotos + 1;
-                Votoxcarrera::where('nombre', $_SESSION["carrera"])
-                ->where('idcandidato', '=', $id)
+                Votoxcarrera::where('idcandidato', '=', $id)
+                ->where('nombre', $_SESSION["carrera"])
                 ->update(['numvotos' => $cantidad]);
             } else {
                 $votoxcarrera["nombre"] = $_SESSION["carrera"];
