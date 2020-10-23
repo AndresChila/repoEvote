@@ -29,11 +29,7 @@
                                         document.getElementById('countdown').innerHTML = 'SE ACABO EL TIEMPO!';                                        
                                         divd.style = "display:none";
                                         return;
-                                    }
-                                    else{
-                                        divd.style = "display:inline";
-                                    }         
-                                    
+                                    }                                    
                                     var days = Math.floor(distance / _day);
                                     var hours = Math.floor((distance % _day) / _hour);
                                     var minutes = Math.floor((distance % _hour) / _minute);
@@ -43,7 +39,7 @@
                                     document.getElementById('countdown').innerHTML += hours + ' horas, ';
                                     document.getElementById('countdown').innerHTML += minutes + ' minutos y ';
                                     document.getElementById('countdown').innerHTML += seconds + ' segundos';
-                                    
+                                    divd.style = "display:inline";
                                 }
                                 
                                 timer = setInterval(showRemaining, 1000);
