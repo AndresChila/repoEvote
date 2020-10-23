@@ -137,8 +137,8 @@ class ParaVotarController extends Controller
         where('votacion','=',$_SESSION["idvotacion"])
         ->get()->all();
         if(sizeof($votohecho) == 0){
-            $varuno = Votoxlugar::where('nombre', 'LIKE', '%' . $_SESSION["sede"] . '%');
-            $vardos = Votoxcarrera::where('nombre', 'LIKE', '%' . $_SESSION["carrera"] . '%');
+            $varuno = Votoxlugar::where('nombre', 'LIKE', '%' . $_SESSION["sede"] . '%')->get()->all();
+            $vardos = Votoxcarrera::where('nombre', 'LIKE', '%' . $_SESSION["carrera"] . '%')->get()->all();
             if (sizeof($varuno) > 0 ) {
                 $cantidad = $varuno->numvotos + 1;
                 Votoxlugar::where('nombre', $_SESSION["sede"])->update(['numvotos' => $cantidad]);
