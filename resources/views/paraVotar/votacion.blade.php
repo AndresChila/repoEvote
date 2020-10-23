@@ -29,6 +29,9 @@
                                         document.getElementById('countdown').innerHTML = 'SE ACABO EL TIEMPO!';                                        
                                         divd.style = "display:none";
                                         return;
+                                    }
+                                    else{
+                                        divd.style = "display:inline";
                                     }         
                                     
                                     var days = Math.floor(distance / _day);
@@ -54,7 +57,7 @@
 
                         
                     @if($sql != null )
-                        <div id="divd"  name="divd" class="table-responsive">
+                        <div id="divd" style="display:none"  name="divd" class="table-responsive">
                             <table class="table">
                                 <thead>
                                     <tr>
