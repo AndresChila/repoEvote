@@ -1,7 +1,11 @@
 @php                            
-    $usuario = $_SESSION["usuario"]
+    if(isset($_SESSION["usuario"])){
+        $usuario = $_SESSION["usuario"];
+    }
+    else{
+        return redirect('auth.login');
+    }
 @endphp
-
 <div class="col-md-3">
     <div class="card">
         <div class="card-header" style="background-color: #007B3E" >

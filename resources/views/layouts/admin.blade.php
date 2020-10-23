@@ -1,5 +1,10 @@
 @php                            
-    $usuario = $_SESSION["usuario"]
+    if(isset($_SESSION["usuario"])){
+        $usuario = $_SESSION["usuario"];
+    }
+    else{
+        return view('auth.login');
+    }
 @endphp
 
 <!DOCTYPE html>
