@@ -36,7 +36,7 @@ class LoginController extends Controller
      * @return void
      */
 
-    protected $IP_SERVER = '52.23.235.46';
+    protected $IP_SERVER = '34.229.184.220';
     
     public function __construct()
     {

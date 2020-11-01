@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class TipoVotacionController extends Controller
 {
     //IP servicio de autenticacion
-    protected $IP_SERVER = '52.23.235.46';
+    protected $IP_SERVER = '34.229.184.220';
     /**
      * Display a listing of the resource.
      *
