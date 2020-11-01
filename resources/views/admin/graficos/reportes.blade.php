@@ -35,7 +35,6 @@
                                 <thead>
                                     <tr>
                                         <th>Nombre votacion</th>
-                                        
                                         <th>Fecha Realización</th>
                                         <th>Duración</th>
                                         <th>Acciones</th>
@@ -46,7 +45,6 @@
                                     <tr>
                                         
                                         <td>{{ $item->nombrevotacion }}</td>
-                                        
                                         <td>{{ $item->fechainicio }}</td>
                                         <td>{{ $item->duracion}}</td>
                                         <td>

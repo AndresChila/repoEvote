@@ -37,7 +37,7 @@
                                                     <td>{{ $item->votocand }}</td>
                                                 </tr>
                                                 @foreach($sedes as $segitem)
-                                                    @if($item->nombrecandidato == $segitem->nombrecandidato)
+                                                    @if($item->nombrecandidato == $segitem->nombrecandidato && $item->apellidocandidato == $segitem->apellidocandidato)
                                                     <tr>
                                                         <th>_______________________________________</th>
                                                         <td>_______________________________________</td>
@@ -51,7 +51,7 @@
                                                     @endif
                                                 @endforeach    
                                                 @foreach ($carreras as $teritem)
-                                                    @if($item->nombrecandidato == $teritem->nombrecandidato)
+                                                    @if($item->nombrecandidato == $teritem->nombrecandidato && $item->apellidocandidato == $teritem->apellidocandidato)
                                                         <tr>
                                                             <th>_______________________________________</th>
                                                             <td>_______________________________________</td>
