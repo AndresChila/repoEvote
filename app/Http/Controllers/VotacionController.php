@@ -64,13 +64,14 @@ class VotacionController extends Controller
             'nombrevotacion' => 'required|string|max:100',
             'tipovotacion' => 'required',
             'fechainicio' => 'required',
-            'duracion' => 'required'
+            'duracion' => 'required',
+            'horainicio' =>'required'
         ];
         $fecha= new DateTime($request->fechainicio);
         $str = $fecha->format("y-m-d");
         $request->fechainicio = $str;
         
-        $Mensaje=["required"=>'el :attribute es requerido'];
+        $Mensaje=["required"=>'El campo :attribute es requerido'];
         $this->validate($request, $campos, $Mensaje);
 
 
@@ -132,9 +133,12 @@ class VotacionController extends Controller
         $requestData = $request->all();
         $campos=[
             'nombrevotacion' => 'required|string|max:100',
-            'tipovotacion' => 'required'
+            'tipovotacion' => 'required',
+            'fechainicio' => 'required',
+            'duracion' => 'required',
+            'horainicio' =>'required'
         ];
-        $Mensaje=["required"=>'el :attribute es requerido'];
+        $Mensaje=["required"=>'El campo :attribute es requerido'];
 
         $this->validate($request, $campos, $Mensaje);
         $votacion = Votacion::findOrFail($id);

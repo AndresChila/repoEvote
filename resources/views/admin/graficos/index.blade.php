@@ -67,11 +67,12 @@
                             
                             <div id="piechart" style="width: 900px; height: 500px;"></div>
                         
-                            <div>
+                            <div class="card">
                                 <a href="{{ route('pdf.vista') }}" class="btn btn-sm btn-primary">
                                     Descargar reporte en PDF
                                 </a>
                             </div>
+                        </br>
                         @else
                             <div>
                                No hay datos para mostrar con este filtro

@@ -25,10 +25,11 @@
     <input class="date form-control" type="text" name="fechainicio" id="fechainicio" value="{{ isset($votacion->fechainicio) ? $votacion->fechainicio : ''}}">
     {!! $errors->first('fechainicio', '<p class="alert alert-danger">:message</p>') !!}
 </div>
-<div class="form-group">
+<div class="form-group {{ $errors->has('horainicio') ? 'has-error' : ''}}">
     <label for="horainicio" class="control-label">{{ 'Hora inicio' }}</label>
     <br/>
     <input class="time form-control" type="time" name="horainicio" id="horainicio" value="{{ isset($votacion->horainicio) ? $votacion->horainicio : ''}}"> </input>
+    {!! $errors->first('horainicio', '<p class="alert alert-danger">:message</p>') !!}
 </div>
 <div class="form-group {{ $errors->has('duracion') ? 'has-error' : ''}}">
     <label for="duracion" class="control-label">{{ 'Duración' }}</label>

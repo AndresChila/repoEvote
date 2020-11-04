@@ -30,6 +30,7 @@
 
                         <br/>
                         <br/>
+                        @if(sizeof($votacion) > 0)
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
@@ -65,7 +66,11 @@
                             </table>
                             <div class="pagination-wrapper"> {!! $votacion->appends(['search' => Request::get('search')])->render() !!} </div>
                         </div>
-
+                        @else
+                            <div class="card">
+                                No hay votaciones próximas creadas en el momento.
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
