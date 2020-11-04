@@ -11,7 +11,10 @@
                         Votaciones en curso
                     </a>
                     </div>
+
+                    
                     <div class="card-body">
+                        @if(sizeof($votacion) > 0)
                         <div class="table-secondary">
                             <table class="table">
                                 <thead>
@@ -47,6 +50,11 @@
                                 </tbody>
                             </table> 
                         </div>
+                        @else
+                            <div class="card">
+                                En el momento no hay votaciones en curso.
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
