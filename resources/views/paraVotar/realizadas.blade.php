@@ -17,6 +17,7 @@
                     <a style="color: #ffffff"> Bienvenido {{ $nombre }} {{ $apellido }} </a>
                     </div>
                     <div class="card-body">
+                        @if(sizeof($votaciones) >= 1)
                         <div class="table-secondary">
                             <table class="table">
                                 <thead>
@@ -60,6 +61,11 @@
                                 </tbody>
                             </table> 
                         </div>
+                        @else
+                        <div class="card-header" style="background-color: #ffd700">
+                            Aún no ha participado en ninguna votacion terminada.
+                        </div>
+                    @endif
                     </div>
                 </div>
             </div>
