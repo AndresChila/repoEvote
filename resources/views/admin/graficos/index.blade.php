@@ -12,7 +12,7 @@
                 <div class="card">
                     <div class="card-header" style="background-color: #007B3E" >
                     <a style="color: #ffffff">
-                        Resultados
+                        Resultados para la votación {{$candidatos1[0]->nombrevotacion}}
                         </a>
                     </div>
                     <div class="card-header" style="background-color: #ffd700" >
