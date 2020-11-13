@@ -6,13 +6,15 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use GuzzleHttp\Client;
 use App\TipoVotacion;
+use App\Http\Controllers\Conexion;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 class TipoVotacionController extends Controller
 {
     //IP servicio de autenticacion
-    protected $IP_SERVER = '52.87.222.112';
+    
+    
     /**
      * Display a listing of the resource.
      *
@@ -67,9 +69,10 @@ class TipoVotacionController extends Controller
     public function store(Request $request)
     {
         session_start();
+        $IP_SERVER = (new Conexion)->conectar();
         $cliente = new Client([
             // Base URI is used with relative requests
-            'base_uri' => 'http://'. $this->IP_SERVER .':8080/autenticacion-app/rest/utils/',
+            'base_uri' => 'http://'. $IP_SERVER .':8080/autenticacion-app/rest/utils/',
             // You can set any number of default request options.
             'timeout'  => 30.0,      
         ]);
@@ -131,11 +134,11 @@ class TipoVotacionController extends Controller
     public function edit($id)
     {
         session_start();
-        
+        $IP_SERVER = (new Conexion)->conectar();
         $tipovotacion = TipoVotacion::findOrFail($id);
         $cliente = new Client([
             // Base URI is used with relative requests
-            'base_uri' => 'http://'. $this->IP_SERVER .':8080/autenticacion-app/rest/utils/',
+            'base_uri' => 'http://'. $IP_SERVER .':8080/autenticacion-app/rest/utils/',
             // You can set any number of default request options.
             'timeout'  => 30.0,      
         ]);
@@ -157,9 +160,10 @@ class TipoVotacionController extends Controller
     public function update(Request $request, $id)
     {
         session_start();
+        $IP_SERVER = (new Conexion)->conectar();
         $cliente = new Client([
             // Base URI is used with relative requests
-            'base_uri' => 'http://'. $this->IP_SERVER .':8080/autenticacion-app/rest/utils/',
+            'base_uri' => 'http://'. $IP_SERVER .':8080/autenticacion-app/rest/utils/',
             // You can set any number of default request options.
             'timeout'  => 30.0,      
         ]);

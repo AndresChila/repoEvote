@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use App\User;
+use App\Http\Controllers\Conexion;
 
 class LoginController extends Controller
 {
@@ -36,7 +37,6 @@ class LoginController extends Controller
      * @return void
      */
 
-    protected $IP_SERVER = '52.87.222.112';
     
     public function __construct()
     {
@@ -72,10 +72,11 @@ class LoginController extends Controller
             
             return redirect('votacion');
         }
-        else{        
+        else{
+            $IP_SERVER = (new Conexion)->conectar();        
             $clientico = new Client([
                 // Base URI is used with relative requests
-                'base_uri' => 'http://'. $this->IP_SERVER .':8080/autenticacion-app/rest/personas/',
+                'base_uri' => 'http://'. $IP_SERVER .':8080/autenticacion-app/rest/personas/',
                 // You can set any number of default request options.
                 'timeout'  => 2.0,      
             ]);
@@ -125,9 +126,10 @@ class LoginController extends Controller
     public function obtenernuevocodigo(){
         session_start();
         $us = $_SESSION["user"];
+        $IP_SERVER = (new Conexion)->conectar();
         $clientico = new Client([
             // Base URI is used with relative requests
-            'base_uri' => 'http://'. $this->IP_SERVER .':8080/autenticacion-app/rest/personas/',
+            'base_uri' => 'http://'. $IP_SERVER .':8080/autenticacion-app/rest/personas/',
             // You can set any number of default request options.
             'timeout'  => 2.0,      
         ]);
