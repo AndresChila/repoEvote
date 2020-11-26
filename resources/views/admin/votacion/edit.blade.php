@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-header" style="background-color: #007b3e" >
                     <a style="color: #ffffff"> 
-                            Editar Votacion #{{ $votacion->id }}
+                            Editar Votación #{{ $votacion->id }}
                     </a>
                     </div>
                     <div class="card-body">
