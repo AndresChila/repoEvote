@@ -45,9 +45,10 @@ class TipoVotacionController extends Controller
     public function create()
     {
         session_start();
+        $IP_SERVER = (new Conexion)->conectar();
         $cliente = new Client([
             // Base URI is used with relative requests
-            'base_uri' => 'http://'. $this->IP_SERVER .':8080/autenticacion-app/rest/utils/',
+            'base_uri' => 'http://'. $IP_SERVER .':8080/autenticacion-app/rest/utils/',
             // You can set any number of default request options.
             'timeout'  => 30.0,      
         ]);
