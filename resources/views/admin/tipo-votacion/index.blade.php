@@ -37,7 +37,7 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>#</th><th>Nombre tipo</th><th>Ocupacion permitida</th><th>Accion</th>
+                                        <th>#</th><th>Nombre tipo</th><th>Ocupación permitida</th><th>Acción</th>
                                     </tr>
                                 </thead>
                                 <tbody>
