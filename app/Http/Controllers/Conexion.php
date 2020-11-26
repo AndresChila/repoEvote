@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 class Conexion 
 {
     //IP servicio de autenticacion
-    protected $IP_SERVER = '35.168.1.29';
+    protected $IP_SERVER = '3.91.59.186';
 
     public function conectar(){
         return $this->IP_SERVER;
